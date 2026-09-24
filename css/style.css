@@ -1041,6 +1041,13 @@ footer {
      before GSAP even runs — saves compositor layer memory. */
   transform: translateY(40px);
   will-change: opacity, transform;
+  /* Safety-net: if GSAP never fires (slow CDN), fade in after 2s */
+  transition: opacity 0.6s ease 2s, transform 0.6s ease 2s;
+}
+
+/* Once GSAP takes over, remove the CSS transition so it doesn't fight animations */
+.reveal.gsap-active {
+  transition: none;
 }
 
 
