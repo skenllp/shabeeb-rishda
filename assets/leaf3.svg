@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260">
+  <!-- Olive branch — elegant, romantic -->
+  <!-- Main curved branch -->
+  <path d="M30 240 Q60 180 100 130 Q140 80 170 30" stroke="#5D7655" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <!-- Olive leaves along branch - pairs -->
+  <path d="M55 198 Q44 188 40 175 Q52 180 55 198 Z" fill="#183A27" stroke="#718A62" stroke-width="0.7"/>
+  <path d="M58 196 Q70 188 74 176 Q62 180 58 196 Z" fill="#10291C" stroke="#718A62" stroke-width="0.7"/>
+  <path d="M74 168 Q62 160 56 147 Q70 151 74 168 Z" fill="#183A27" stroke="#718A62" stroke-width="0.7"/>
+  <path d="M78 166 Q90 158 95 145 Q82 149 78 166 Z" fill="#10291C" stroke="#718A62" stroke-width="0.7"/>
+  <path d="M92 140 Q80 133 74 120 Q88 124 92 140 Z" fill="#183A27" stroke="#5D7655" stroke-width="0.7"/>
+  <path d="M96 138 Q108 131 113 118 Q100 122 96 138 Z" fill="#10291C" stroke="#5D7655" stroke-width="0.7"/>
+  <path d="M110 112 Q98 106 92 94 Q106 97 110 112 Z" fill="#183A27" stroke="#5D7655" stroke-width="0.6"/>
+  <path d="M114 110 Q126 104 131 92 Q118 95 114 110 Z" fill="#10291C" stroke="#5D7655" stroke-width="0.6"/>
+  <path d="M128 84 Q116 79 110 68 Q124 70 128 84 Z" fill="#183A27" stroke="#5D7655" stroke-width="0.6"/>
+  <path d="M132 82 Q144 77 149 66 Q136 68 132 82 Z" fill="#10291C" stroke="#5D7655" stroke-width="0.6"/>
+  <path d="M148 56 Q138 52 133 42 Q145 44 148 56 Z" fill="#183A27" stroke="#718A62" stroke-width="0.5"/>
+  <path d="M151 54 Q162 50 166 40 Q155 42 151 54 Z" fill="#10291C" stroke="#718A62" stroke-width="0.5"/>
+  <!-- Small gold-tipped berries -->
+  <circle cx="56" cy="185" r="3" fill="#244A32" stroke="#C8A85B" stroke-width="0.7" opacity="0.55"/>
+  <circle cx="93" cy="128" r="2.5" fill="#244A32" stroke="#C8A85B" stroke-width="0.6" opacity="0.5"/>
+  <circle cx="130" cy="72" r="2" fill="#244A32" stroke="#C8A85B" stroke-width="0.6" opacity="0.45"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300">
+  <!-- Elegant tropical leaf — thin stroke, premium editorial -->
+  <path d="M100 280 C100 280 95 200 80 150 C60 90 30 55 15 20 C50 35 80 70 100 120 C120 70 150 35 185 20 C170 55 140 90 120 150 C105 200 100 280 100 280 Z" fill="#10291C" stroke="#5D7655" stroke-width="1.2" stroke-linejoin="round"/>
+  <!-- Mid-vein -->
+  <path d="M100 280 L100 50" stroke="#244A32" stroke-width="1.5" fill="none"/>
+  <!-- Side veins left -->
+  <path d="M100 100 Q78 85 65 78" stroke="#183A27" stroke-width="0.7" fill="none"/>
+  <path d="M97 140 Q72 126 58 120" stroke="#183A27" stroke-width="0.7" fill="none"/>
+  <path d="M95 180 Q74 168 62 162" stroke="#183A27" stroke-width="0.6" fill="none"/>
+  <!-- Side veins right -->
+  <path d="M100 100 Q122 85 135 78" stroke="#183A27" stroke-width="0.7" fill="none"/>
+  <path d="M103 140 Q128 126 142 120" stroke="#183A27" stroke-width="0.7" fill="none"/>
+  <path d="M105 180 Q126 168 138 162" stroke="#183A27" stroke-width="0.6" fill="none"/>
+  <!-- Gold tip highlight -->
+  <circle cx="100" cy="30" r="4" fill="none" stroke="#C8A85B" stroke-width="0.7" opacity="0.4"/>
+</svg>

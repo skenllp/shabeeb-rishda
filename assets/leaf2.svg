@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280">
+  <!-- Fern frond — elegant editorial -->
+  <!-- Main stem -->
+  <path d="M100 270 Q98 200 100 140 Q102 80 100 20" stroke="#4D7A52" stroke-width="1.8" fill="none"/>
+  <!-- Frond pairs — graduated sizes -->
+  <path d="M100 50 C84 42 68 48 58 62 C74 62 88 58 100 50 Z" fill="#183A27" stroke="#5D7655" stroke-width="0.8"/>
+  <path d="M100 50 C116 42 132 48 142 62 C126 62 112 58 100 50 Z" fill="#183A27" stroke="#5D7655" stroke-width="0.8"/>
+  <path d="M100 82 C80 72 60 78 46 94 C66 94 84 88 100 82 Z" fill="#10291C" stroke="#5D7655" stroke-width="0.8"/>
+  <path d="M100 82 C120 72 140 78 154 94 C134 94 116 88 100 82 Z" fill="#10291C" stroke="#5D7655" stroke-width="0.8"/>
+  <path d="M100 116 C78 106 56 112 42 128 C64 128 84 122 100 116 Z" fill="#0B1D14" stroke="#5D7655" stroke-width="0.7"/>
+  <path d="M100 116 C122 106 144 112 158 128 C136 128 116 122 100 116 Z" fill="#0B1D14" stroke="#5D7655" stroke-width="0.7"/>
+  <path d="M100 150 C80 142 62 146 50 158 C68 160 86 154 100 150 Z" fill="#0B1D14" stroke="#718A62" stroke-width="0.6"/>
+  <path d="M100 150 C120 142 138 146 150 158 C132 160 114 154 100 150 Z" fill="#0B1D14" stroke="#718A62" stroke-width="0.6"/>
+  <path d="M100 182 C84 176 70 178 62 188 C76 190 90 186 100 182 Z" fill="#0B1D14" stroke="#718A62" stroke-width="0.5"/>
+  <path d="M100 182 C116 176 130 178 138 188 C124 190 110 186 100 182 Z" fill="#0B1D14" stroke="#718A62" stroke-width="0.5"/>
+  <!-- Gold midrib highlight -->
+  <circle cx="100" cy="22" r="3" fill="none" stroke="#C8A85B" stroke-width="0.6" opacity="0.35"/>
+</svg>
