@@ -72,7 +72,9 @@ body {
   line-height: 1.7;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  perspective: 1200px;
+  /* perspective removed — putting perspective on body forces the browser to
+     composite the ENTIRE scrolling page into a 3D layer, causing heavy
+     repaint cost on every scroll event. GSAP sets it per-element instead. */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -383,6 +385,9 @@ main#site {
   justify-content: center;
   padding: var(--section-pad) clamp(20px, 6vw, 80px);
   overflow: hidden;
+  /* Scope layout calculations to each section — prevents style/layout
+     recalculation from bubbling up through the full document tree */
+  contain: layout style;
 }
 
 .content {
@@ -634,8 +639,9 @@ main#site {
    ============================================================ */
 .content-card {
   background: linear-gradient(165deg, rgba(13, 36, 24, 0.72) 0%, rgba(6, 18, 12, 0.88) 100%);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  /* Reduced blur: 18px→10px cuts GPU fill rate cost significantly */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(200, 168, 91, 0.22);
   border-radius: 16px;
   padding: clamp(34px, 6vw, 56px) clamp(20px, 5vw, 44px);
@@ -647,6 +653,8 @@ main#site {
   position: relative;
   margin: 0 auto;
   width: 100%;
+  /* Promote to own layer so backdrop-filter doesn't repaint neighbours */
+  will-change: transform;
 }
 
 .card-corner {
@@ -684,8 +692,8 @@ main#site {
 /* Hero lower card for date, location, and lineage */
 .hero-details-card {
   background: linear-gradient(165deg, rgba(8, 26, 18, 0.72) 0%, rgba(3, 14, 9, 0.86) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(200, 168, 91, 0.24);
   border-radius: 16px;
   padding: clamp(24px, 4vw, 36px) clamp(20px, 4vw, 36px);
@@ -696,6 +704,7 @@ main#site {
     0 0 0 1px rgba(255, 255, 255, 0.03) inset,
     0 1px 0 rgba(200, 168, 91, 0.22) inset;
   position: relative;
+  will-change: transform;
 }
 
 .hero-details-card .hero-date {
@@ -751,8 +760,8 @@ main#site {
 
 .couple-card {
   background: linear-gradient(160deg, rgba(16, 44, 30, 0.55) 0%, rgba(7, 22, 14, 0.72) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(200, 168, 91, 0.22);
   border-radius: 12px;
   padding: clamp(24px, 4vw, 32px) clamp(16px, 3vw, 24px);
@@ -761,6 +770,7 @@ main#site {
     inset 0 1px 0 rgba(200, 168, 91, 0.18);
   position: relative;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  will-change: transform;
 }
 
 .couple-card:hover {
@@ -1038,8 +1048,11 @@ footer {
    ============================================================ */
 .reveal {
   opacity: 0;
-  transform: translateZ(-220px) rotateX(18deg) translateY(40px);
-  transform-style: preserve-3d;
+  /* Use only 2D transforms for initial state; GSAP applies 3D on animation.
+     This avoids promoting every off-screen element to a 3D stacking context
+     before GSAP even runs — saves compositor layer memory. */
+  transform: translateY(40px);
+  will-change: opacity, transform;
 }
 
 /* Fade-up reveal */

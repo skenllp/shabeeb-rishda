@@ -117,14 +117,17 @@
         rotSpeed: (Math.random() - 0.5) * 0.01,
         baseX: sprite.position.x,
         swaySpeed: 0.3 + Math.random() * 0.5,
-        swayOffset: Math.random() * Math.PI * 2
+        swayOffset: Math.random() * Math.PI * 2,
+        // Cache rotation in JS to avoid marking material dirty every frame
+        rot: sprite.material.rotation
       });
     }
   }
 
-  // Scroll-driven camera parallax through the "forest"
   var scrollY = 0;
   var targetScrollY = 0;
+  var lastScrollY = -1;      // track last rendered scroll position
+  var lastCameraX = null;    // track last camera.position.x
   window.addEventListener('scroll', function () {
     targetScrollY = window.scrollY;
   }, { passive: true });
@@ -134,9 +137,18 @@
   }
 
   var clock = new THREE.Clock();
+  var lastT = 0;
   function animate() {
     requestAnimationFrame(animate);
     var t = clock.getElapsedTime();
+    var dt = t - lastT;
+
+    // Skip render if nothing has moved (saves GPU on idle scroll)
+    var scrollChanged = Math.abs(targetScrollY - lastScrollY) > 0.5;
+    var timeChanged = dt > 0.016; // ~60fps cap
+    if (!scrollChanged && !timeChanged) return;
+    lastT = t;
+    lastScrollY = targetScrollY;
 
     // Smooth scroll interpolation
     scrollY += (targetScrollY - scrollY) * 0.08;
@@ -148,11 +160,13 @@
     camera.rotation.z = Math.sin(progress * Math.PI) * 0.03;
     camera.position.x = Math.sin(t * 0.1) * 0.4;
 
-    // Drift + sway leaves for a living, breathing forest
+    // Drift + sway leaves — use cached JS rotation to avoid material dirty-flag every frame
     leaves.forEach(function (l) {
       l.mesh.position.y -= l.driftSpeed * 0.02;
       l.mesh.position.x = l.baseX + Math.sin(t * l.swaySpeed + l.swayOffset) * 0.6;
-      l.mesh.material.rotation += l.rotSpeed;
+      // Accumulate rotation in JS, then write to material once
+      l.rot += l.rotSpeed;
+      l.mesh.material.rotation = l.rot;
       if (l.mesh.position.y < -40) {
         l.mesh.position.y = 40;
       }
@@ -176,7 +190,9 @@
     gsap.utils.toArray('.reveal').forEach(function (el, i) {
       gsap.fromTo(
         el,
-        { opacity: 0, z: -220, rotationX: 18, y: 40 },
+        // transformPerspective applies perspective per-element, avoiding the
+        // need for body-level perspective that causes full-page repaint
+        { opacity: 0, transformPerspective: 1200, z: -220, rotationX: 18, y: 40 },
         {
           opacity: 1, z: 0, rotationX: 0, y: 0,
           duration: 1.1,
