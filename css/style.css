@@ -101,19 +101,6 @@ body::after {
   opacity: 0.028;
 }
 
-/* ============================================================
-   3D CANVAS LAYER (Three.js)
-   ============================================================ */
-#canvas-container {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-}
-#canvas-container canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
 
 /* ============================================================
    GATE / COVER SCREEN
@@ -602,6 +589,7 @@ main#site {
   pointer-events: none;
   z-index: 2;
   opacity: 0.45;
+  overflow: hidden;
 }
 .hero-botanical.tl { top: 0; left: 0; width: clamp(120px, 22vw, 220px); }
 .hero-botanical.tr { top: 0; right: 0; width: clamp(120px, 22vw, 220px); transform: scaleX(-1); }
@@ -1055,45 +1043,6 @@ footer {
   will-change: opacity, transform;
 }
 
-/* Fade-up reveal */
-.reveal-up {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* SVG path draw animation */
-@keyframes drawPath {
-  from { stroke-dashoffset: 1; }
-  to   { stroke-dashoffset: 0; }
-}
-
-.draw-path {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-/* Floating leaf animations */
-@keyframes sway {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  33%       { transform: translateX(5px) rotate(1.5deg); }
-  66%       { transform: translateX(-4px) rotate(-1deg); }
-}
-
-.leaf-sway {
-  animation: sway 8s ease-in-out infinite;
-}
-
-.leaf-sway-slow {
-  animation: sway 13s ease-in-out infinite;
-  animation-delay: -4s;
-}
 
 /* ============================================================
    MOBILE RESPONSIVE
@@ -1190,7 +1139,6 @@ footer {
   #gate { transition: none; }
 
   .particle { animation: none; display: none; }
-  .leaf-sway, .leaf-sway-slow { animation: none; }
 
   * {
     animation-duration: 0.01ms !important;
