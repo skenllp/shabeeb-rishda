@@ -630,6 +630,91 @@ main#site {
 }
 
 /* ============================================================
+   CARD CONTAINERS & GLASSMORPHISM SURFACES
+   ============================================================ */
+.content-card {
+  background: linear-gradient(165deg, rgba(13, 36, 24, 0.72) 0%, rgba(6, 18, 12, 0.88) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(200, 168, 91, 0.22);
+  border-radius: 16px;
+  padding: clamp(34px, 6vw, 56px) clamp(20px, 5vw, 44px);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.52),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 1px 0 rgba(200, 168, 91, 0.28) inset,
+    0 0 35px rgba(200, 168, 91, 0.04);
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.card-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  opacity: 0.6;
+}
+.card-corner.tl {
+  top: 10px;
+  left: 10px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+}
+.card-corner.tr {
+  top: 10px;
+  right: 10px;
+  border-top: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+}
+.card-corner.bl {
+  bottom: 10px;
+  left: 10px;
+  border-bottom: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+}
+.card-corner.br {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+}
+
+/* Hero lower card for date, location, and lineage */
+.hero-details-card {
+  background: linear-gradient(165deg, rgba(8, 26, 18, 0.72) 0%, rgba(3, 14, 9, 0.86) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(200, 168, 91, 0.24);
+  border-radius: 16px;
+  padding: clamp(24px, 4vw, 36px) clamp(20px, 4vw, 36px);
+  margin: clamp(28px, 4vw, 40px) auto 0;
+  max-width: 620px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 1px 0 rgba(200, 168, 91, 0.22) inset;
+  position: relative;
+}
+
+.hero-details-card .hero-date {
+  margin-bottom: 6px;
+}
+
+.hero-details-card .lineage {
+  margin-top: 0;
+}
+
+.hero-card-line {
+  width: 70px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 18px auto;
+  opacity: 0.55;
+}
+
+/* ============================================================
    COUPLE SECTION
    ============================================================ */
 #couple {
@@ -652,79 +737,69 @@ main#site {
   font-size: clamp(0.78rem, 2vw, 0.88rem);
   color: var(--green-muted);
   letter-spacing: 0.06em;
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 }
 
-/* Individual couple cards */
+/* Couple cards */
 .couple-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-  max-width: 580px;
+  gap: 20px;
+  max-width: 620px;
   margin: 0 auto;
+}
+
+.couple-card {
+  background: linear-gradient(160deg, rgba(16, 44, 30, 0.55) 0%, rgba(7, 22, 14, 0.72) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 168, 91, 0.22);
+  border-radius: 12px;
+  padding: clamp(24px, 4vw, 32px) clamp(16px, 3vw, 24px);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(200, 168, 91, 0.18);
   position: relative;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-.couple-cards::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  background: linear-gradient(180deg,
-    transparent 0%,
-    var(--gold) 30%,
-    var(--gold) 70%,
-    transparent 100%
-  );
-  opacity: 0.35;
+.couple-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(200, 168, 91, 0.45);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(200, 168, 91, 0.12);
 }
 
-.couple-block {
-  padding: 28px 24px;
-  position: relative;
-}
-
-.couple-block::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 24px;
-  height: 24px;
-  border-top: 1px solid var(--gold);
-  border-left: 1px solid var(--gold);
-  opacity: 0.4;
-}
-
-.couple-block:last-child::before {
-  left: auto;
-  right: 0;
-  border-left: none;
-  border-right: 1px solid var(--gold);
-}
-
-.couple-block .role {
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  background: rgba(200, 168, 91, 0.1);
+  border: 1px solid rgba(200, 168, 91, 0.28);
+  border-radius: 20px;
+  color: var(--gold-light);
   font-family: var(--font-sans);
   font-size: 0.62rem;
-  letter-spacing: 0.28em;
-  color: var(--gold-light);
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  margin-bottom: 12px;
-  opacity: 0.75;
+  margin-bottom: 14px;
 }
 
-.couple-block .who {
+.role-badge svg {
+  color: var(--gold);
+}
+
+.couple-card .who {
   font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  font-size: clamp(1.4rem, 4vw, 1.85rem);
   color: var(--ivory);
   line-height: 1.2;
   margin-bottom: 10px;
 }
 
-.couple-block .parent {
+.couple-card .parent {
   font-family: var(--font-sans);
   font-size: clamp(0.72rem, 1.8vw, 0.8rem);
   color: var(--green-light);
@@ -741,16 +816,22 @@ main#site {
 }
 
 #details .content {
-  max-width: 520px;
+  max-width: 560px;
 }
 
-.event-date-display {
-  margin: 32px auto;
+.event-date-card {
+  background: linear-gradient(180deg, rgba(16, 44, 30, 0.48) 0%, rgba(8, 24, 16, 0.68) 100%);
+  border: 1px solid rgba(200, 168, 91, 0.22);
+  border-radius: 14px;
+  padding: 24px 20px;
+  margin: 16px auto 0;
+  max-width: 340px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(200, 168, 91, 0.18);
 }
 
 .event-date-num {
   font-family: var(--font-serif);
-  font-size: clamp(4.5rem, 16vw, 8rem);
+  font-size: clamp(4.5rem, 16vw, 7.5rem);
   line-height: 0.9;
   color: var(--ivory);
   font-weight: 300;
@@ -784,43 +865,66 @@ main#site {
   letter-spacing: 0.3em;
   color: var(--green-light);
   text-transform: uppercase;
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
-.detail-rows {
-  margin: 36px auto 0;
+.detail-cards {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 12px;
+  margin-top: 24px;
+  text-align: left;
 }
 
-.detail-row {
+.detail-card {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 18px 0;
-  border-top: 1px solid rgba(200, 168, 91, 0.12);
+  gap: 18px;
+  background: linear-gradient(90deg, rgba(16, 42, 28, 0.6) 0%, rgba(8, 22, 14, 0.72) 100%);
+  border: 1px solid rgba(200, 168, 91, 0.18);
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(200, 168, 91, 0.12);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.detail-row:last-child {
-  border-bottom: 1px solid rgba(200, 168, 91, 0.12);
+.detail-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(200, 168, 91, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 18px rgba(200, 168, 91, 0.1);
 }
 
-.detail-row .label {
+.detail-card-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(200, 168, 91, 0.08);
+  border: 1px solid rgba(200, 168, 91, 0.22);
+  border-radius: 10px;
+}
+
+.detail-card-body {
+  flex-grow: 1;
+}
+
+.detail-card-body .label {
   font-family: var(--font-sans);
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
   color: var(--gold-light);
   text-transform: uppercase;
-  margin-bottom: 6px;
-  opacity: 0.7;
+  margin-bottom: 4px;
+  opacity: 0.85;
 }
 
-.detail-row .value {
+.detail-card-body .value {
   font-family: var(--font-serif);
-  font-size: clamp(1.1rem, 3.2vw, 1.4rem);
+  font-size: clamp(1.05rem, 2.8vw, 1.35rem);
   color: var(--ivory);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
 
 /* ============================================================
@@ -832,6 +936,10 @@ main#site {
     linear-gradient(180deg, var(--bg-base) 0%, var(--bg-dark) 50%, var(--bg-void) 100%);
 }
 
+#hosts .content {
+  max-width: 600px;
+}
+
 .hosts-heading {
   font-size: clamp(1.8rem, 5vw, 2.5rem);
   font-style: italic;
@@ -839,12 +947,32 @@ main#site {
   margin-bottom: 12px;
 }
 
-.hosts-names {
+.parents-card {
+  background: linear-gradient(180deg, rgba(16, 44, 29, 0.55) 0%, rgba(8, 22, 14, 0.7) 100%);
+  border: 1px solid rgba(200, 168, 91, 0.22);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 0 auto;
+  max-width: 480px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(200, 168, 91, 0.16);
+}
+
+.parents-card .hosts-names {
   font-family: var(--font-serif);
   font-size: clamp(1.1rem, 3vw, 1.35rem);
   color: var(--ivory-soft);
   line-height: 1.6;
-  margin-bottom: 28px;
+  margin-bottom: 0;
+}
+
+.mentions-card {
+  background: linear-gradient(180deg, rgba(12, 34, 22, 0.55) 0%, rgba(6, 18, 11, 0.72) 100%);
+  border: 1px solid rgba(200, 168, 91, 0.18);
+  border-radius: 14px;
+  padding: 24px 22px;
+  margin: 0 auto;
+  max-width: 520px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(200, 168, 91, 0.12);
 }
 
 .mentions {
@@ -959,24 +1087,41 @@ footer {
    ============================================================ */
 @media (max-width: 600px) {
   :root {
-    --section-pad: clamp(64px, 16vw, 100px);
+    --section-pad: clamp(56px, 14vw, 84px);
+  }
+
+  .content-card {
+    padding: clamp(28px, 6vw, 40px) clamp(16px, 4vw, 24px);
+    border-radius: 14px;
   }
 
   .couple-cards {
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: 16px;
   }
 
-  .couple-cards::after {
-    display: none;
+  .couple-card {
+    padding: 22px 18px;
   }
 
-  .couple-block {
-    padding: 24px 16px;
-    border-top: 1px solid rgba(200, 168, 91, 0.15);
+  .detail-card {
+    padding: 14px 16px;
+    gap: 14px;
   }
 
-  .couple-block::before { display: none; }
+  .detail-card-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .parents-card,
+  .mentions-card {
+    padding: 18px 16px;
+  }
+
+  .hero-details-card {
+    padding: 22px 16px;
+  }
 
   .hero-botanical.bl,
   .hero-botanical.br {
