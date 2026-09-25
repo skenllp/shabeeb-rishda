@@ -8,6 +8,45 @@
   var video = document.getElementById('video');
   var skipVideo = document.getElementById('skipVideo');
   var site = document.getElementById('site');
+  var bgMusic = document.getElementById('bgMusic');
+  var musicToggle = document.getElementById('musicToggle');
+
+  function setMusicState(playing) {
+    if (musicToggle) {
+      musicToggle.classList.toggle('is-playing', playing);
+      musicToggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
+      musicToggle.setAttribute('aria-label', playing ? 'Pause music' : 'Play music');
+    }
+  }
+
+  function stopMusic() {
+    if (bgMusic) bgMusic.pause();
+    setMusicState(false);
+  }
+
+  /* Play the background song when the invitation is opened */
+  function playMusic() {
+    if (!bgMusic) return;
+    bgMusic.play().catch(function () { /* autoplay blocked until user gesture */ });
+    setMusicState(true);
+  }
+
+  if (musicToggle) {
+    musicToggle.addEventListener('click', function () {
+      if (bgMusic.paused) {
+        playMusic();
+      } else {
+        stopMusic();
+      }
+    });
+  }
+
+  /* Stop the music when the site/tab is closed or hidden */
+  window.addEventListener('pagehide', stopMusic);
+  window.addEventListener('beforeunload', stopMusic);
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stopMusic();
+  });
 
   function showSite() {
     introVideo.style.display = 'none';
@@ -21,6 +60,8 @@
     introVideo.style.display = 'flex';
     introVideo.style.opacity = '0';
     introVideo.style.transition = 'opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1)';
+
+    playMusic();
 
     video.play().catch(function () { showSite(); });
 
