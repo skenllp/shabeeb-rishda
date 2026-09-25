@@ -1,4 +1,6 @@
 (function () {
+  document.documentElement.classList.add('js');
+
   /* ================= Gate + Video flow ================= */
   var gate = document.getElementById('gate');
   var openBtn = document.getElementById('openBtn');
@@ -38,28 +40,43 @@
     showSite();
   });
 
-  /* ================= GSAP scroll reveals ================= */
+  /* ================= Lightweight scroll reveals =================
+     No external libraries. Simple CSS transition (opacity + translateY)
+     triggered by an IntersectionObserver. Plays once only (no reverse),
+     so scrolling does not re-hide text — removes perceived lag.
+     If JS fails to run at all, the `.js` class is never added and all
+     text stays visible. */
   function initReveals() {
-    if (!window.gsap || !window.ScrollTrigger) return;
-    gsap.registerPlugin(ScrollTrigger);
+    var els = document.querySelectorAll('.reveal');
 
-    gsap.utils.toArray('.reveal').forEach(function (el, i) {
-      gsap.fromTo(
-        el,
-        // transformPerspective applies perspective per-element, avoiding the
-        // need for body-level perspective that causes full-page repaint
-        { opacity: 0, transformPerspective: 1200, z: -220, rotationX: 18, y: 40 },
-        {
-          opacity: 1, z: 0, rotationX: 0, y: 0,
-          duration: 1.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-          }
+    if (!('IntersectionObserver' in window)) {
+      // No observer support: show everything so content is never stuck hidden.
+      for (var j = 0; j < els.length; j++) {
+        els[j].classList.add('is-visible');
+      }
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
         }
-      );
-    });
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+
+    for (var i = 0; i < els.length; i++) {
+      observer.observe(els[i]);
+    }
+
+    // Safety net: reveal everything shortly after load so no text can ever
+    // stay stuck invisible, even if the observer misbehaves.
+    window.setTimeout(function () {
+      var remaining = document.querySelectorAll('.js .reveal:not(.is-visible)');
+      for (var k = 0; k < remaining.length; k++) {
+        remaining[k].classList.add('is-visible');
+      }
+    }, 1500);
   }
 })();

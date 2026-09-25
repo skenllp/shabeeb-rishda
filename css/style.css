@@ -18,6 +18,7 @@
   --bg-canopy:  #244A32;
 
   /* Botanical greens */
+  --green-dark:    #143823;
   --green-muted:   #5D7655;
   --green-light:   #718A62;
   --green-pale:    #8AA87A;
@@ -527,7 +528,7 @@ main#site {
   font-family: var(--font-serif);
   font-size: clamp(3.8rem, 13vw, 7rem);
   line-height: 0.95;
-  color: var(--ivory);
+  color: var(--green-dark);
   font-weight: 300;
   letter-spacing: -0.01em;
   margin: 0;
@@ -540,7 +541,7 @@ main#site {
 .hero-names .name-amp {
   display: block;
   font-style: italic;
-  color: var(--gold-light);
+  color: var(--green-dark);
   font-size: 0.42em;
   line-height: 2.0;
   letter-spacing: 0.12em;
@@ -777,7 +778,7 @@ main#site {
   background: rgba(200, 168, 91, 0.1);
   border: 1px solid rgba(200, 168, 91, 0.28);
   border-radius: 20px;
-  color: var(--gold-light);
+  color: var(--green-muted);
   font-family: var(--font-sans);
   font-size: 0.62rem;
   letter-spacing: 0.25em;
@@ -1032,15 +1033,24 @@ footer {
 }
 
 /* ============================================================
-   REVEAL ANIMATIONS (GSAP controls from JS)
+   REVEAL ANIMATIONS (JS adds .is-visible on scroll)
    ============================================================ */
 .reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Only hidden when JS is confirmed running — if JS fails,
+   nothing is ever stuck invisible. */
+.js .reveal {
   opacity: 0;
-  /* Use only 2D transforms for initial state; GSAP applies 3D on animation.
-     This avoids promoting every off-screen element to a 3D stacking context
-     before GSAP even runs — saves compositor layer memory. */
-  transform: translateY(40px);
-  will-change: opacity, transform;
+  transform: translateY(20px);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
@@ -1126,6 +1136,7 @@ footer {
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
+  .js .reveal,
   .reveal {
     opacity: 1;
     transform: none;
@@ -1151,6 +1162,7 @@ footer {
    ============================================================ */
 .text-gold { color: var(--gold); }
 .text-green { color: var(--green-light); }
+.text-dark-green { color: var(--green-dark); }
 .text-ivory { color: var(--ivory); }
 .text-dim { color: var(--ivory-dim); }
 

@@ -162,13 +162,16 @@
 
     <!-- Hero background image -->
     <div class="hero-bg-wrap" aria-hidden="true">
-      <img
-        src="assets/bg.png"
-        alt=""
-        class="hero-bg-img"
-        loading="eager"
-        decoding="async"
-      />
+      <picture>
+        <source srcset="assets/mobile.png" media="(max-width: 600px)">
+        <img
+          src="assets/bg-green.png"
+          alt=""
+          class="hero-bg-img"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
       <!-- Dark forest overlay for text legibility -->
       <div class="hero-bg-overlay"></div>
     </div>
@@ -248,7 +251,7 @@
         <span class="name-line">Shabeeb</span>
         <span class="name-amp">&amp;</span>
         <span class="name-line">Rishdha</span>
-      </h2>
+      </h2> 
 
       <!-- Gold botanical divider -->
       <svg class="hero-gold-divider reveal" width="200" height="28" viewBox="0 0 200 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
