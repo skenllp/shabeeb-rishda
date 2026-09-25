@@ -551,7 +551,7 @@ main#site {
 
 #hero .content {
   z-index: 4;
-  padding: clamp(60px, 12vw, 100px) 20px;
+  padding: clamp(110px, 20vw, 150px) 20px clamp(60px, 12vw, 100px);
 }
 
 /* YOU ARE INVITED label */
