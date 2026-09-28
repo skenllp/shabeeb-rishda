@@ -81,6 +81,18 @@
     showSite();
   });
 
+  /* Hero scroll button smooth scroll */
+  var heroScrollBtn = document.querySelector('.hero-scroll-btn');
+  if (heroScrollBtn) {
+    heroScrollBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = document.getElementById('couple');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
   /* ================= Lightweight scroll reveals =================
      No external libraries. Simple CSS transition (opacity + translateY)
      triggered by an IntersectionObserver. Plays once only (no reverse),

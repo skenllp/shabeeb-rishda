@@ -754,6 +754,89 @@ main#site {
   opacity: 0.55;
 }
 
+/* Hero scroll button */
+.hero-scroll-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: clamp(24px, 4.2vh, 40px);
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: transform 0.35s var(--ease-luxury), opacity 0.3s ease;
+}
+
+.hero-scroll-text {
+  font-family: var(--font-sans);
+  font-size: clamp(0.58rem, 1.6vw, 0.68rem);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ivory-dim);
+  opacity: 0.85;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.hero-scroll-arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 168, 91, 0.38);
+  background: radial-gradient(circle, rgba(16, 41, 28, 0.75) 0%, rgba(3, 16, 11, 0.85) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    0 0 16px rgba(200, 168, 91, 0.12),
+    inset 0 1px 0 rgba(200, 168, 91, 0.25);
+  animation: heroArrowFloat 2.4s ease-in-out infinite;
+  transition: all 0.35s var(--ease-luxury);
+}
+
+.hero-scroll-arrow svg {
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.hero-scroll-btn:hover {
+  transform: translateY(-2px);
+}
+
+.hero-scroll-btn:hover .hero-scroll-text {
+  color: var(--gold-light);
+  opacity: 1;
+}
+
+.hero-scroll-btn:hover .hero-scroll-arrow {
+  border-color: var(--gold);
+  background: radial-gradient(circle, rgba(24, 58, 39, 0.9) 0%, rgba(6, 20, 14, 0.95) 100%);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(200, 168, 91, 0.35),
+    inset 0 1px 0 rgba(200, 168, 91, 0.4);
+  color: var(--gold-light);
+}
+
+.hero-scroll-btn:hover .hero-scroll-arrow svg {
+  transform: translateY(2px);
+}
+
+@keyframes heroArrowFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
 /* ============================================================
    COUPLE SECTION
    ============================================================ */
@@ -762,6 +845,62 @@ main#site {
     radial-gradient(ellipse 60% 50% at 50% 50%, rgba(24, 58, 39, 0.35) 0%, transparent 75%),
     linear-gradient(180deg, var(--bg-base) 0%, var(--bg-forest) 50%, var(--bg-base) 100%);
   padding: var(--section-pad) clamp(20px, 6vw, 80px);
+}
+
+/* ============================================================
+   QURANIC BLESSING (SURAH AR-RUM 30:21)
+   ============================================================ */
+.quran-verse-wrap {
+  margin: 10px auto 20px;
+  max-width: 580px;
+  padding: 0 8px;
+  text-align: center;
+}
+
+.quran-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.quran-arabic {
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
+  font-size: clamp(1.45rem, 4.4vw, 2.2rem);
+  line-height: 2.15;
+  font-weight: 400;
+  color: var(--gold);
+  text-shadow:
+    0 0 25px rgba(200, 168, 91, 0.28),
+    0 2px 8px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0;
+  margin-bottom: 18px;
+  direction: rtl;
+  unicode-bidi: isolate;
+  word-spacing: 2px;
+}
+
+.quran-english {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 3.2vw, 1.42rem);
+  line-height: 1.65;
+  font-weight: 400;
+  color: #ECCBC5; /* Soft rose-tinted blush ivory matching user's image */
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  margin: 0 auto 14px;
+  max-width: 520px;
+  letter-spacing: 0.015em;
+  quotes: none;
+}
+
+.quran-surah {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.92rem, 2.4vw, 1.12rem);
+  color: var(--gold-light);
+  letter-spacing: 0.06em;
+  opacity: 0.92;
 }
 
 .couple-heading {
